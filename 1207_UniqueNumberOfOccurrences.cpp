@@ -8,7 +8,7 @@ public:
         
         set<int> s;
         for (auto v: m)
-            s.insert(v.first);
+            s.insert(v.second);
         
         return s.size() == m.size();
     }
