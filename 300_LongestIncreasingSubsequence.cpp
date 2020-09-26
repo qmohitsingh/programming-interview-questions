@@ -20,3 +20,32 @@ public:
     }
     
 };
+
+//time complexity: O(n^2) - bottom-up approach
+class Solution {
+    int k = 0;
+    //vector<int> memo(10010, -1);
+public:
+    
+    int lengthOfLIS(vector<int>& nums) { //O(n^2)
+        
+        if (nums.size() == 0) return 0;
+        
+        vector<int> lis(nums.size(), 1);
+        
+        int val = 1;
+        
+        for (int i=0; i<nums.size(); i++) {
+            for (int j=0; j<i; j++) {
+                if (nums[j] < nums[i]) {
+                    lis[i] = max(lis[i], lis[j] + 1);
+                    val = max(val, lis[i]);
+                }
+            }
+        }
+        
+        return val;
+        
+    }
+    
+};
