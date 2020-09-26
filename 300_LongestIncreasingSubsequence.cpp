@@ -49,3 +49,39 @@ public:
     }
     
 };
+
+//time complexity: O(n^2) - top-down approach
+class Solution {
+    int k = 0;
+    vector<int> A;
+    vector<int> memo; 
+public:
+    
+    Solution() {
+        memo.assign(10000007,-1);
+    }
+    
+    int lengthOfLIS(vector<int>& nums) { //O(n^2)
+        if (nums.size() == 0) return 0;
+        
+        nums.push_back(INT_MAX);
+        A = nums;
+        int ans = LIS(nums.size()-1);
+        return ans - 1;
+        
+    }
+    
+    int LIS(int i) {                                 // O(2^n) overall
+      if (i == 0) return 1;
+      int &ans = memo[i];
+      if (ans != -1) return ans;                     
+      ans = 1;         
+      for (int j = 0; j < i; ++j)      {          
+        if (A[j] < A[i])                            
+          ans = max(ans, LIS(j)+1); 
+      }
+      return ans;
+    }
+    
+};
+
